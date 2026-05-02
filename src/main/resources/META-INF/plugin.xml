@@ -1,15 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.tjlee.gaussdbjdbcdriver</id>
-    <name>GaussDB-JDBC-Driver</name>
-    <vendor>tjlee</vendor>
+  <id>com.github.tjlee.gaussdbjdbcdriver</id>
+  <name>GaussDB JDBC Driver</name>
+  <vendor>tjlee</vendor>
 
-    <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.database</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+  <extensions defaultExtensionNs="com.intellij.database">
+    <artifactsConfig config="drivers/gaussdb-artifacts.xml"/>
+    <driversConfig config="drivers/gaussdb-drivers.xml"/>
+<!--    <connectionInterceptor implementation="com.github.tjlee.gaussdbjdbcdriver.auth.GaussDbIamAuthProvider"/>-->
+  </extensions>j
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.tjlee.gaussdbjdbcdriver.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.tjlee.gaussdbjdbcdriver.startup.MyProjectActivity" />
-    </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.github.tjlee.gaussdbjdbcdriver.DriverInstaller"/>
+    <postStartupActivity implementation="com.github.tjlee.gaussdbjdbcdriver.DriverInstallerStartupActivity"/>
+  </extensions>
 </idea-plugin>
