@@ -10,7 +10,7 @@
   <extensions defaultExtensionNs="com.intellij.database">
     <artifactsConfig config="drivers/gaussdb-artifacts.xml"/>
     <driversConfig config="drivers/gaussdb-drivers.xml"/>
-<!--    <connectionInterceptor implementation="com.github.tjlee.gaussdbjdbcdriver.auth.GaussDbIamAuthProvider"/>-->
+    <connectionInterceptor implementation="com.github.tjlee.gaussdbjdbcdriver.auth.GaussDbIamAuthProvider"/>
   </extensions>j
 
   <extensions defaultExtensionNs="com.intellij">

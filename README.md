@@ -1,34 +1,39 @@
-# GaussDB-JDBC-Driver
+# GaussDB JDBC Driver
 
 ![Build](https://github.com/tjlee/GaussDB-JDBC-Driver/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [group](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml), [name](./src/main/resources/META-INF/plugin.xml), and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin description in `README` (see [Tips][docs:plugin-description])
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
-
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+Bundles and automatically installs the **GaussDB JDBC driver** into JetBrains DataGrip and other IntelliJ-based IDEs.
 
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
+GaussDB is a distributed relational database developed by Huawei, based on the openGauss kernel and compatible with PostgreSQL. This plugin ships the driver JAR files directly — no manual download or configuration is required. The driver is installed automatically on IDE startup and is immediately available for use in database connections.
 
-To keep everything working, do not remove `<!-- ... -->` sections. 
+**Bundled driver version:** 8.6.1 (huaweicloud-dws-jdbc)
+
+**Connection URL formats:**
+
+Standard connection:
+`jdbc:gaussdb://<host>:<port>/<database>`
+
+IAM (Access Key) authentication:
+`jdbc:dws:iam://<cluster-name>:<region>/<database>`
+
+**IAM Authentication:**
+
+The plugin provides a dedicated **GaussDB IAM (Access Key)** authentication method for connecting via Huawei Cloud IAM credentials. When selected, the following fields are available in the authentication panel:
+
+- **Access Key ID** — IAM access key
+- **Secret Access Key** — IAM secret key (stored securely in the OS keychain)
+- **IAM Username (DbUser)** — the IAM username to map to a database user; hyphens (`-`) are not supported
+- **Auto-create user** — when enabled, automatically creates the DbUser in the database if it does not exist
 <!-- Plugin description end -->
 
 ## Installation
 
 - Using the IDE built-in plugin system:
 
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "GaussDB-JDBC-Driver"</kbd> >
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "GaussDB JDBC Driver"</kbd> >
   <kbd>Install</kbd>
 
 - Using JetBrains Marketplace:
@@ -42,10 +47,3 @@ To keep everything working, do not remove `<!-- ... -->` sections.
 
   Download the [latest release](https://github.com/tjlee/GaussDB-JDBC-Driver/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
-
----
-Plugin based on the [IntelliJ Platform Plugin Template][template].
-
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
