@@ -100,6 +100,12 @@ class GaussDbIamAuthProvider : DatabaseAuthProvider {
         )
     }
 
+    // 3-param version exists in 252 but was removed in 253+ (replaced by 4-param with project).
+    // Override explicitly so Kotlin doesn't generate a bridge calling super, which would
+    // throw NoSuchMethodError on 253+.
+    @Suppress("OVERRIDE_DEPRECATION")
+    override suspend fun handleNullConnection(proto: ProtoConnection, silent: Boolean, attempt: Int): Boolean = false
+
     override suspend fun interceptConnection(proto: ProtoConnection, silent: Boolean): Boolean {
         DatabaseCredentialsAuthProvider.applyInitialCredentials(proto, this, { p, _ ->
             val point       = p.connectionPoint
